@@ -12,9 +12,10 @@
 
 <body>
   <canvas id="myCanvas" width="1200" height="800"></canvas>
-  <button id = "start"  onclick="play()">Start</button>
+  <button id = "start"  onclick="start()"> Play </button>
   <script>
-
+    var c = document.getElementById("myCanvas");
+    var ctx = c.getContext("2d");
     var WIDTH = 1200;
     var HEIGHT = 800;
     var DISK_WIDTH = 80;
@@ -52,8 +53,6 @@
     }
 
     function draw(poles) {
-      var c = document.getElementById("myCanvas");
-      var ctx = c.getContext("2d");
       ctx.clearRect(0, 0, WIDTH, HEIGHT);
       var ys = [HEIGHT / 6, ( 7 * HEIGHT) / 24, (47 * HEIGHT) / 120];
       for (let i = 0; i < poles.length; i++) {
@@ -74,7 +73,6 @@
     }
 
     function handleClick(event) {
-      var c = document.getElementById("myCanvas");
       const rect = c.getBoundingClientRect()
       var x = event.clientX - rect.left;
       var selected = -1;
@@ -93,7 +91,7 @@
         if (clicks % 2 == 0) {
           move(poles[prev], poles[selected]);
           draw(poles);
-          won();
+          won(); 
         }
         else {
           prev = selected;
@@ -101,6 +99,7 @@
       }
       
     }
+
 
     function reset() {
       p1 = new Pole(1, [3,2,1]);
