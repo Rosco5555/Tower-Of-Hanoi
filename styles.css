@@ -7,3 +7,10 @@ canvas {
     width: 1200px;
     background-color: grey;
 }
+
+#start {
+    position: absolute;
+    left: 880px;
+    top: 850px;
+    font-size: 50px;
+}
