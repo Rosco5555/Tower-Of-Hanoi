@@ -1,0 +1,101 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title> Tower of Hanoi </title>
+
+  <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+  <canvas id="myCanvas" width="1200" height="800"></canvas>
+  <button onclick="start()">Start</button>
+  <script>
+
+    var WIDTH = 1200;
+    var HEIGHT = 800;
+    var DISK_WIDTH = 80;
+    var DISK_HEIGHT = 100;
+    class Pole {
+      constructor(n, disks) {
+        this.n = n;
+        this.x = ((n-1) * (WIDTH / 3)) + (WIDTH / 6);
+        this.disks = disks;
+      }
+    }
+
+    function move(src, dest) {
+      l1 = dest.disks.length;
+      l2 = src.disks.length;
+      // Source is empty, no disks to be moved
+      if (l2 == 0) {
+        return false;
+      }
+      // Destination is empty, can always add disks to it
+      if (l1 == 0) {
+        dest.disks.push(src.disks.pop())
+        return true;
+      }
+
+      d1 = dest.disks[dest.disks.length - 1];
+      d2 = src.disks[src.disks.length - 1];
+
+      if (d1 > d2) {
+        dest.disks.push(d2);
+        src.disks.pop();
+        return true;
+      }
+      return false;
+    }
+
+    function draw(poles) {
+      var c = document.getElementById("myCanvas");
+      var ctx = c.getContext("2d");
+      ctx.clearRect(0, 0, WIDTH, HEIGHT);
+      var ys = [HEIGHT / 6, ( 7 * HEIGHT) / 24, (47 * HEIGHT) / 120];
+      for (let i = 0; i < poles.length; i++) {
+        //Drawing the peg
+        var x = poles[i].x;
+        ctx.beginPath();
+        ctx.moveTo(x, HEIGHT);
+        ctx.lineTo(x, HEIGHT - (HEIGHT / 2) );
+        ctx.stroke();
+        for (let j = 0; j < poles[i].disks.length; j++) {
+          var disk = poles[i].disks[j];
+          //Drawing a disk
+          ctx.beginPath();
+          ctx.fillRect(x - ((disk * DISK_WIDTH) / 2), HEIGHT - (DISK_HEIGHT + (j * DISK_HEIGHT)), DISK_WIDTH * disk, DISK_HEIGHT);
+          ctx.stroke();
+        }
+      }
+    }
+
+    function printMousePos(event) {
+      var x = event.clientX;
+      var y = event.clientY;
+      console.log("x ", x, "y ", y);
+    }
+
+
+    //Setup
+    function start() {
+      let p1 = new Pole(1, [3,2,1]);
+      let p2 = new Pole(2, []);
+      let p3 = new Pole(3, []);
+      let poles = [p1, p2, p3];
+      draw(poles);
+      //document.addEventListener("click", printMousePos);
+    }
+
+
+
+
+
+
+
+  </script>
+</body>
+</html>
