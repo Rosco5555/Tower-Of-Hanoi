@@ -1,3 +1,6 @@
+html {
+    background-color: grey;
+}
 canvas {
     padding-left: 0;
     padding-right: 0;
@@ -5,7 +8,7 @@ canvas {
     margin-right: auto;
     display: block;
     width: 1200px;
-    background-color: grey;
+    background-color: #DDDDDD;
 }
 
 #start {
