@@ -98,6 +98,8 @@
         clicks++;
         if (clicks % 2 == 0) {
           move(pegs[prev], pegs[selected]);
+          var audio = new Audio('move.mp3');
+          audio.play();
           draw(pegs);
           showMoves();
           won();
@@ -121,6 +123,7 @@
     }
 
     function showMoves() {
+      ctx.font = "30px Arial";
       var txt = "Moves: " + moves;
       ctx.fillText(txt, (WIDTH / 2) - 60, 50);
     }
@@ -139,6 +142,7 @@
     }
 
     function displayOptimal() {
+      ctx.font = "30px Arial";
       var txt = "Minimum moves: " + optimal;
       ctx.fillText(txt, 50, 50);
     }
